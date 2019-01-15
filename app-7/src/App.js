@@ -1,18 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import NewTask from './Components/NewTask'
+import List from './Components/List'
 
 class App extends Component {
-  render() {
+  constructor(){
+    super()
+
+    this.state = {
+      userInputArray: []
+    }
+
+    this.handleAddToArray = this.handleAddToArray.bind(this)
+  }
+
+  // handleChange(val){
+  //   this.setState({userInput : val})
+  // }
+
+
+  handleAddToArray(userIn){
+    this.setState({userInputArray: [...this.state.userInputArray, userIn]})
+    
+    
+  }
+
+  render(){
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <h1>My to-do list:</h1>
+          <NewTask addItem = {this.handleAddToArray}/>
+          <List userInArray = {this.state.userInputArray}/>
       </div>
     );
   }
